@@ -182,7 +182,6 @@ public class Hero extends Ship {
         if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
             shop.setVisible(true);
         }
-
         if (velocity.len() > 50.0f) {
             float bx, by;
             bx = position.x - 28.0f * (float) Math.cos(Math.toRadians(angle));

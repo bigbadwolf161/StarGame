@@ -76,7 +76,7 @@ public class Weapon {
         if (fireTimer > firePeriod && (curBullets > 0 || maxBullets == -1)) {
             fireTimer = 0;
             curBullets--;
-            // shootSound.play();
+            shootSound.play();
 
             for (int i = 0; i < slots.length; i++) {
                 float x, y, vx, vy;
