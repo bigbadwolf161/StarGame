@@ -1,6 +1,7 @@
 package com.star.app.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -97,18 +98,25 @@ public class GameController {
         this.level = 1;
         Gdx.input.setInputProcessor(stage);
         generateTwoBigAsteroids();
+        easterEgg();
         this.msg = "Level 1";
         this.msgTimer = 3.0f;
         this.tmpStr = new StringBuilder();
         this.music = Assets.getInstance().getAssetManager().get("audio/Music.mp3");
         this.music.setLooping(true);
-        // this.music.play();
+        this.music.play();
     }
 
     public void generateTwoBigAsteroids() {
         for (int i = 0; i < 100; i++) {
             this.asteroidController.setup(MathUtils.random(0, GameController.SPACE_WIDTH), MathUtils.random(0, GameController.SPACE_HEIGHT),
                     MathUtils.random(-150.0f, 150.0f), MathUtils.random(-150.0f, 150.0f), 1.0f);
+        }
+    }
+
+    public void easterEgg(){
+        if(Gdx.input.isKeyPressed(Input.Keys.G) || Gdx.input.isKeyPressed(Input.Keys.B)){
+            ScreenManager.getInstance().changeScreen(ScreenManager.ScreenType.CAPTION);
         }
     }
 
@@ -135,6 +143,9 @@ public class GameController {
 
         if (!hero.isAlive()) {
             ScreenManager.getInstance().changeScreen(ScreenManager.ScreenType.GAMEOVER, hero);
+        }
+        if(hero.isAlive()){
+            easterEgg();
         }
         if (asteroidController.getActiveList().size() == 0) {
             level++;
